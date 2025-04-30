@@ -11,6 +11,9 @@ describe("Orange HRM Tests", () => {
     firstNameField: "[name='firstName']",
     lastNameField: "[name='lastName']",
     genericField: ".oxd-input--active",
+    datesField: "[placeholder='yyyy-dd-mm']",
+    closeDateButton: ".--close",
+    saveUserInfoButton: "[type='submit']",
   };
 
   it.only("User Info Update - Success", () => {
@@ -21,11 +24,17 @@ describe("Orange HRM Tests", () => {
     cy.location("pathname").should("eq", "/web/index.php/dashboard/index");
     cy.get(selectorsList.dashboardGrid).should("be.visible");
     cy.get(selectorsList.myInfoButton).click();
-    cy.get(selectorsList.firstNameField).clear().type("João");
-    cy.get(selectorsList.lastNameField).clear().type("Melo");
-    cy.get(selectorsList.genericField).eq(3).clear().type("170099");
-    cy.get(selectorsList.genericField).eq(4).clear().type("990017");
-    cy.get(selectorsList.genericField).eq(5).clear().type("999999");
+    cy.get(selectorsList.firstNameField).clear().type("Test");
+    cy.get(selectorsList.lastNameField).clear().type("Test");
+    cy.get(selectorsList.genericField).eq(3).clear().type("test");
+    cy.get(selectorsList.genericField).eq(4).clear().type("test");
+    cy.get(selectorsList.genericField).eq(5).clear().type("test");
+    cy.get(selectorsList.datesField).eq(0).clear().type("2026-08-20");
+    cy.get(selectorsList.closeDateButton).click();
+    cy.get(selectorsList.datesField).eq(1).clear().type("2028-08-20");
+    cy.get(selectorsList.closeDateButton).click();
+    cy.get(selectorsList.saveUserInfoButton).eq(0).click();
+    cy.get("body").should("contain", "Successfully Updated");
   });
   it("Login - Fail", () => {
     cy.visit("/auth/login");
