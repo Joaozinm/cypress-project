@@ -14,6 +14,8 @@ describe("Orange HRM Tests", () => {
     datesField: "[placeholder='yyyy-dd-mm']",
     closeDateButton: ".--close",
     saveUserInfoButton: "[type='submit']",
+    checkBoxFields: "[tabindex='0']",
+    genderRadio: ".oxd-radio-wrapper",
   };
 
   it.only("User Info Update - Success", () => {
@@ -33,6 +35,11 @@ describe("Orange HRM Tests", () => {
     cy.get(selectorsList.closeDateButton).click();
     cy.get(selectorsList.datesField).eq(1).clear().type("2028-08-20");
     cy.get(selectorsList.closeDateButton).click();
+    cy.get(selectorsList.checkBoxFields).eq(0).click();
+    cy.contains("div", "Brazilian").click();
+    cy.get(selectorsList.checkBoxFields).eq(1).click();
+    cy.contains("div", "Married").click();
+    cy.get(selectorsList.genderRadio).eq(1).click();
     cy.get(selectorsList.saveUserInfoButton).eq(0).click();
     cy.get("body").should("contain", "Successfully Updated");
   });
