@@ -2,10 +2,6 @@ import userData from "../fixtures/users/userData.json";
 
 describe("Orange HRM Tests", () => {
   const selectorsList = {
-    usernameField: "[name='username']",
-    passwordField: "[name='password']",
-    submitButton: "[type='submit']",
-    wrongCredentialAlert: "[role='alert']",
     dashboardGrid: ".orangehrm-dashboard-grid",
   };
 

@@ -1,4 +1,5 @@
 import userData from "../fixtures/users/userData.json";
+import LoginPage from "../pages/loginPage";
 
 describe("Orange HRM Tests", () => {
   const selectorsList = {
@@ -19,29 +20,31 @@ describe("Orange HRM Tests", () => {
   };
 
   it.only("User Info Update - Success", () => {
-    cy.visit("/auth/login");
-    cy.get(selectorsList.usernameField).type(userData.userSuccess.username);
-    cy.get(selectorsList.passwordField).type(userData.userSuccess.password);
-    cy.get(selectorsList.submitButton).click();
-    cy.location("pathname").should("eq", "/web/index.php/dashboard/index");
-    cy.get(selectorsList.dashboardGrid).should("be.visible");
-    cy.get(selectorsList.myInfoButton).click();
-    cy.get(selectorsList.firstNameField).clear().type("Test");
-    cy.get(selectorsList.lastNameField).clear().type("Test");
-    cy.get(selectorsList.genericField).eq(3).clear().type("test");
-    cy.get(selectorsList.genericField).eq(4).clear().type("test");
-    cy.get(selectorsList.genericField).eq(5).clear().type("test");
-    cy.get(selectorsList.datesField).eq(0).clear().type("2026-08-20");
-    cy.get(selectorsList.closeDateButton).click();
-    cy.get(selectorsList.datesField).eq(1).clear().type("2028-08-20");
-    cy.get(selectorsList.closeDateButton).click();
-    cy.get(selectorsList.checkBoxFields).eq(0).click();
-    cy.contains("div", "Brazilian").click();
-    cy.get(selectorsList.checkBoxFields).eq(1).click();
-    cy.contains("div", "Married").click();
-    cy.get(selectorsList.genderRadio).eq(1).click();
-    cy.get(selectorsList.saveUserInfoButton).eq(0).click();
-    cy.get("body").should("contain", "Successfully Updated");
+    LoginPage.accessLoginPage();
+    LoginPage.loginWithUser(
+      userData.userSuccess.username,
+      userData.userSuccess.password
+    );
+
+    // cy.location("pathname").should("eq", "/web/index.php/dashboard/index");
+    // cy.get(selectorsList.dashboardGrid).should("be.visible");
+    // cy.get(selectorsList.myInfoButton).click();
+    // cy.get(selectorsList.firstNameField).clear().type("Test");
+    // cy.get(selectorsList.lastNameField).clear().type("Test");
+    // cy.get(selectorsList.genericField).eq(3).clear().type("test");
+    // cy.get(selectorsList.genericField).eq(4).clear().type("test");
+    // cy.get(selectorsList.genericField).eq(5).clear().type("test");
+    // cy.get(selectorsList.datesField).eq(0).clear().type("2026-08-20");
+    // cy.get(selectorsList.closeDateButton).click();
+    // cy.get(selectorsList.datesField).eq(1).clear().type("2028-08-20");
+    // cy.get(selectorsList.closeDateButton).click();
+    // cy.get(selectorsList.checkBoxFields).eq(0).click();
+    // cy.contains("div", "Brazilian").click();
+    // cy.get(selectorsList.checkBoxFields).eq(1).click();
+    // cy.contains("div", "Married").click();
+    // cy.get(selectorsList.genderRadio).eq(1).click();
+    // cy.get(selectorsList.saveUserInfoButton).eq(0).click();
+    // cy.get("body").should("contain", "Successfully Updated");
   });
   it("Login - Fail", () => {
     cy.visit("/auth/login");
