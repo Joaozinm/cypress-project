@@ -4,6 +4,9 @@ import DashboardPage from "../pages/dashboardPage";
 import MenuPage from "../pages/menuPage";
 import MyInfoPage from "../pages/myInfoPage";
 
+const Chance = require("chance");
+const chance = new Chance();
+
 describe("Orange HRM Tests", () => {
   it("User Info Update - Success", () => {
     LoginPage.accessLoginPage();
@@ -13,8 +16,8 @@ describe("Orange HRM Tests", () => {
     );
     DashboardPage.verifyDashboardPage();
     MenuPage.accessMyInfoPage();
-    MyInfoPage.changeFirstName("Joao");
-    MyInfoPage.changeLastName("Silva");
+    MyInfoPage.changeFirstName(chance.first());
+    MyInfoPage.changeLastName(chance.last());
     MyInfoPage.changeGenericField(3, "Test");
     MyInfoPage.changeGenericField(4, "Test");
     MyInfoPage.changeGenericField(5, "Test");
