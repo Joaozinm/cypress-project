@@ -5,7 +5,7 @@ import MenuPage from "../pages/menuPage";
 import MyInfoPage from "../pages/myInfoPage";
 
 describe("Orange HRM Tests", () => {
-  it.only("User Info Update - Success", () => {
+  it("User Info Update - Success", () => {
     LoginPage.accessLoginPage();
     LoginPage.loginWithUser(
       userData.userSuccess.username,
@@ -29,12 +29,5 @@ describe("Orange HRM Tests", () => {
     MyInfoPage.clickGenderRadio(1);
     MyInfoPage.clickSaveUserInfoButton();
     MyInfoPage.verifySuccessMessage("Successfully Updated");
-  });
-  it("Login - Fail", () => {
-    cy.visit("/auth/login");
-    cy.get(selectorsList.usernameField).type(userData.userFail.username);
-    cy.get(selectorsList.passwordField).type(userData.userFail.password);
-    cy.get(selectorsList.submitButton).click();
-    cy.get(selectorsList.wrongCredentialAlert);
   });
 });
